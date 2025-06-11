@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home Setup Task Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- React 18 CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Your React App -->
+  <script type="text/babel">
+    const Navbar = () => (
+      <nav className="navbar">
+        <h1>🏠 Home Setup Planner</h1>
+      </nav>
+    );
+
+    const Footer = () => (
+      <footer className="footer">
+        <p>&copy; 2025 Home Planner</p>
+      </footer>
+    );
+
+    const AddTaskForm = () => (
+      <div className="add-task-form">
+        <input type="text" placeholder="Add new item..." />
+        <button>Add Task</button>
+      </div>
+    );
+
+    const TaskItem = ({ task }) => (
+      <li className="task-item">
+        <span>{task}</span>
+        <div className="task-buttons">
+            <button>Edit</button>
+          <button>Complete</button>
+          <button>Remove</button>
+        </div>
+      </li>
+    );
+
+    const TaskList = () => {
+      const tasks = [
+        'Buy Sofa',
+        'Order Curtains',
+        'Get Kitchen Essentials',
+        'Purchase Lamps',
+        'Setup Internet',
+      ];
+      return (
+        <ul className="task-list">
+          {tasks.map((task, index) => <TaskItem key={index} task={task} />)}
+        </ul>
+      );
+    };
+
+    const App = () => (
+      <div className="container">
+        <Navbar />
+        <h2>🛒 New Home Essentials</h2>
+        <AddTaskForm />
+        <TaskList />
+        <Footer />
+      </div>
+    );
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
