@@ -1,0 +1,143 @@
+/* Global Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #F1F0E8;
+  color: #213555;
+}
+
+/* Make full screen layout */
+.container {
+  width: 100%;
+  padding: 2rem 4vw; /* fluid side spacing */
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background-color: #89A8B2;
+  padding: 1.5rem 2rem;
+  color: white;
+  text-align: center;
+}
+
+/* Footer */
+.footer {
+  width: 100%;
+  background-color: #B3C8CF;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  margin-top: 3rem;
+  color: white;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+
+/* Add Task Form */
+.add-task-form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.add-task-form input {
+  flex-grow: 1;
+  min-width: 240px;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.add-task-form button {
+  background-color: #89A8B2;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-task-form button:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Task List */
+.task-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.task-item {
+  background-color: #E5E1DA;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Task Buttons */
+.task-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.task-buttons button {
+  background-color: #B3C8CF;
+  color: #213555;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: all 0.2s ease;
+}
+
+.task-buttons button:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .add-task-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-buttons {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .task-buttons button {
+    width: 100%;
+  }
+}
