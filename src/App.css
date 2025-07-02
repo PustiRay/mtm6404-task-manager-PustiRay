@@ -13,11 +13,12 @@ body, html {
   color: #213555;
 }
 
-/* Make full screen layout */
 .container {
-  width: 100%;
-  padding: 2rem 4vw; /* fluid side spacing */
+  width: 100vw;           /* Use the full viewport width */
+  padding: 2rem;          /* Fixed padding instead of vw */
+  box-sizing: border-box;
 }
+
 
 /* Navbar */
 .navbar {
