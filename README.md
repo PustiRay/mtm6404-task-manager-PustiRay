@@ -25,12 +25,22 @@ The app is designed to help users plan and manage purchases for their new home s
 
 📂 Project Structure
 src/
+
 ├── components/
+
 │ ├── Navbar.jsx
+
 │ ├── Footer.jsx
+
 │ ├── AddTaskForm.jsx
+
 │ ├── TaskItem.jsx
+
 │ └── TaskList.jsx
+
 ├── App.jsx
+
 ├── main.jsx
+
 └── App.css
+
