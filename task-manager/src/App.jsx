@@ -1,19 +1,25 @@
-import React from 'react';
+import './App.css';
 import Navbar from './components/Navbar';
-import Home from './components/Home';
-import TaskList from './components/TaskList';
 import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Home from './pages/Home';
+import ListPage from './pages/ListPage';
+import { TasksProvider } from './context/TasksContext';
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <div style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-        <Home />
-        <TaskList />
-      </div>
-      <Footer />
-    </div>
+    <TasksProvider>
+      <Router>
+        <div className="container">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/list/:listName" element={<ListPage />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </TasksProvider>
   );
 }
 

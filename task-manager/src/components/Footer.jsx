@@ -1,12 +1,7 @@
-import React from 'react';
-import './Footer.css'; // We'll add styles here
-
-function Footer() {
-  return (
-    <footer className="footer">
-      <p>© 2025 Task Manager. All rights reserved.</p>
-    </footer>
-  );
-}
+const Footer = () => (
+  <footer className="footer">
+    <p>&copy; 2025 Home Planner</p>
+  </footer>
+);
 
 export default Footer;
