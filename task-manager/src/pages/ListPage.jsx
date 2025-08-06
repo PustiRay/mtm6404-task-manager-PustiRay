@@ -1,3 +1,4 @@
+// src/pages/ListPage.jsx
 import { useParams, Link } from "react-router-dom";
 import { useTasks } from "../context/TasksContext";
 import AddTaskForm from "../components/AddTaskForm";
@@ -6,16 +7,12 @@ import { useState } from "react";
 
 const ListPage = () => {
   const { listName } = useParams();
-  const { lists, setLists } = useTasks();
+  const { lists, updateTasksInList } = useTasks();
   const tasks = lists[listName] || [];
 
   const [input, setInput] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [showCompleted, setShowCompleted] = useState(true);
-
-  const saveTasks = (updatedTasks) => {
-    setLists({ ...lists, [listName]: updatedTasks });
-  };
 
   const handleAdd = () => {
     if (input.trim()) {
@@ -30,7 +27,7 @@ const ListPage = () => {
         return priorities[a.priority] - priorities[b.priority];
       });
 
-      saveTasks(updatedTasks);
+      updateTasksInList(listName, updatedTasks);
       setInput("");
       setPriority("Medium");
     }
@@ -40,12 +37,12 @@ const ListPage = () => {
     const updated = tasks.map((task, i) =>
       i === index ? { ...task, completed: !task.completed } : task
     );
-    saveTasks(updated);
+    updateTasksInList(listName, updated);
   };
 
   const handleDelete = (index) => {
     const updated = tasks.filter((_, i) => i !== index);
-    saveTasks(updated);
+    updateTasksInList(listName, updated);
   };
 
   return (

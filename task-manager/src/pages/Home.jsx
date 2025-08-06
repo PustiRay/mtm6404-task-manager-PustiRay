@@ -1,15 +1,16 @@
+// src/pages/Home.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTasks } from "../context/TasksContext";
 
 const Home = () => {
-  const { lists, setLists } = useTasks();
+  const { lists, addList, deleteList } = useTasks();
   const [listName, setListName] = useState("");
 
   const handleCreateList = () => {
     const trimmedName = listName.trim();
     if (trimmedName && !lists[trimmedName]) {
-      setLists({ ...lists, [trimmedName]: [] });
+      addList(trimmedName);
       setListName("");
     }
   };
@@ -18,11 +19,11 @@ const Home = () => {
   const countIncomplete = (tasks) =>
     tasks.filter((task) => !task.completed).length;
 
-  // Choose border color by tasks left with subtle tones
+  // Choose border color by tasks left
   const borderColorByCount = (count) => {
-    if (count === 0) return "#A3C293"; // soft green
-    if (count <= 3) return "#E8D7A6"; // soft yellow
-    return "#E1A39D"; // soft coral (muted red)
+    if (count === 0) return "#2ecc71"; // green
+    if (count <= 3) return "#f1c40f"; // yellow
+    return "#e74c3c"; // red
   };
 
   return (
@@ -100,12 +101,9 @@ const Home = () => {
         {Object.entries(lists).map(([name, tasks]) => {
           const tasksLeft = countIncomplete(tasks);
           return (
-            <Link
-              to={`/list/${encodeURIComponent(name)}`}
+            <div
               key={name}
               style={{
-                textDecoration: "none",
-                color: "#213555",
                 backgroundColor: "#E5E1DA",
                 padding: "1rem 1.25rem",
                 borderRadius: 12,
@@ -113,8 +111,8 @@ const Home = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                transition: "box-shadow 0.3s ease",
                 border: `4px solid ${borderColorByCount(tasksLeft)}`,
+                position: "relative",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.boxShadow = "0 8px 16px rgba(0,0,0,0.15)";
@@ -123,24 +121,36 @@ const Home = () => {
                 e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
               }}
             >
-              <h3 style={{ marginBottom: "0.5rem", wordBreak: "break-word" }}>
+              <Link
+                to={`/list/${encodeURIComponent(name)}`}
+                style={{
+                  textDecoration: "none",
+                  color: "#213555",
+                  fontWeight: "bold",
+                  fontSize: "1.1rem",
+                  marginBottom: "0.5rem",
+                  wordBreak: "break-word",
+                }}
+              >
                 {name}
-              </h3>
+              </Link>
+
               <p
                 style={{
                   margin: 0,
                   fontWeight: "600",
                   fontSize: "1rem",
-                  color: tasksLeft === 0 ? "#A3C293" : "#E1A39D",
+                  color: tasksLeft === 0 ? "#2ecc71" : "#e74c3c",
                 }}
               >
                 Tasks to finish: {tasksLeft}
               </p>
+
               {tasksLeft === 0 && (
                 <p
                   style={{
                     fontSize: "0.9rem",
-                    color: "#A3C293",
+                    color: "#2ecc71",
                     marginTop: "0.5rem",
                     fontStyle: "italic",
                   }}
@@ -148,7 +158,25 @@ const Home = () => {
                   All done! 🎉
                 </p>
               )}
-            </Link>
+
+              <button
+                onClick={() => deleteList(name)}
+                style={{
+                  backgroundColor: "#B3C8CF",
+                  color: "#213555",
+                  border: "none",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                  opacity: 0.9,
+                  transition: "all 0.2s ease",
+                  marginTop: "0.75rem",
+                  alignSelf: "flex-start",
+                }}
+              >
+                Remove
+              </button>
+            </div>
           );
         })}
       </div>
